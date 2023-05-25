@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
+const cors = require('cors');
 
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
@@ -10,6 +11,7 @@ const path = require('path');
 app.use('/images', express.static(path.join(__dirname, 'images')));
 /********************* WHAT IS DIRNAME AGAIN?????  **********************/
 
+app.use(cors());
 mongoose.connect('mongodb+srv://User-P6:password-P6@oc-p6.5mb8gjz.mongodb.net/?retryWrites=true&w=majority',
     {
         useNewUrlParser: true,
@@ -30,6 +32,6 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.use('/api/sauces', saucesRoutes);
-app.use('/api/sauces', userRoutes);
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
