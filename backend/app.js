@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
 const cors = require('cors');
+require("dotenv").config();
 
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
@@ -12,7 +13,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 /********************* WHAT IS DIRNAME AGAIN?????  **********************/
 
 app.use(cors());
-mongoose.connect('mongodb+srv://User-P6:password-P6@oc-p6.5mb8gjz.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(process.env.SECRET_MONGO,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
